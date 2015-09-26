@@ -1,4 +1,8 @@
 tignore file for Xcode4 and Xcode5 Source projects
+
+*.xcworkspace
+*.xcuserstate
+
 #
 # Apple bugs, waiting for Apple to fix/respond:
 #
