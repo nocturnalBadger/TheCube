@@ -10,6 +10,7 @@ import Foundation
 
 class Side
 {
-    var contents = Array<Sticker>()
+    //var contents = Array<Sticker>()
+    var contents = (Dictionary<Character, Sticker>(), Dictionary<Character, Sticker>())
     
 }

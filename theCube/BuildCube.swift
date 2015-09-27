@@ -9,8 +9,10 @@
 import Foundation
 
 
-func buildCubeFromFile(fileName: String)
+func buildCubeFromFile(fileName: String) -> Cube
 {
+    let cube = Cube()
+    
     var possibleContent: String?
     
     if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")
@@ -25,18 +27,12 @@ func buildCubeFromFile(fileName: String)
     if let content = possibleContent
     {
         let fileContent = content.componentsSeparatedByString("\n")
+        
+        var pieceLettersToBeAssigned = "abcdABCDefghEFGHijklIJKLmnopMNOPqrstQRSTuvwxUVWX" //Lower case are edges.
+        
         for line in fileContent
         {
-            var currentPiece: Piece
-            
-            if (line.characters.count == 2)
-            {
-                currentPiece = Piece(pieceType: Piece.types.edge)
-            }
-            else
-            {
-                currentPiece = Piece(pieceType: Piece.types.corner)
-            }
+            let currentSide = Side()
             
             for letter in line.characters
             {
@@ -57,8 +53,25 @@ func buildCubeFromFile(fileName: String)
                         currentPieceColor = Sticker.PossibleColors.white
                     
                 }
-                currentPiece.contents.append(Sticker(color: currentPieceColor))
+                let currentPieceLetter: Character = pieceLettersToBeAssigned[pieceLettersToBeAssigned.startIndex]
+                //print(currentPieceLetter)
+                if String(currentPieceLetter).capitalizedString == String(currentPieceLetter)
+                {
+                    currentSide.contents.0[currentPieceLetter] = Sticker(color: currentPieceColor)
+                    
+                    // If the letter is capitol, put it into the list of corners
+                }
+                else
+                {
+                    currentSide.contents.1[currentPieceLetter] = Sticker(color: currentPieceColor)
+                    // Otherwise, it's an edge
+                }
+                pieceLettersToBeAssigned.removeAtIndex(pieceLettersToBeAssigned.startIndex)
             }
+            cube.contents.append(currentSide)
+            //print(currentSide.contents)
         }
     }
+    
+    return cube
 }
