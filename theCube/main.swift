@@ -10,4 +10,17 @@ import Foundation
 
 let cube = buildCubeFromFile("cube")
 
+if cube.contents.count == 6
+{
+    var indexOfSide = 0
+    for side in cube.contents
+    {
+        side.opposingSide = cube.determineOpposingSide(cube, indexOfSide: indexOfSide)
+        indexOfSide++
+    }
+    
+    
+}
+
+
 cube.printCubeContents()
