@@ -13,7 +13,6 @@ class Side
     //var contents = Array<Sticker>()
     var contents = (Dictionary<Character, Sticker>(), Dictionary<Character, Sticker>())
     
-    var opposingSide: Side? = nil
     var sidesAffectedByRotation = (Array<Character>(), Array<Character>())
     
     

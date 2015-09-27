@@ -14,7 +14,7 @@ class Cube
     
     func printCubeContents()
     {
-        var readableSideIndex = 1
+        var readableSideIndex = 0
         for side in self.contents
         {
             print("Side \(readableSideIndex):")
@@ -33,45 +33,35 @@ class Cube
         }
     }
     
-    /*
-    func rotateSide(indexOfSide: Int)
-    {
-        if indexOfSide < self.contents.count
-        {
-            let side = self.contents[indexOfSide]
-        }
-        else { sleep(1) }
-        
-    }
-    */
     
-    func determineOpposingSide(theCube: Cube, indexOfSide: Int) throws -> Side
+    func rotateSide(indexOfSide: Int) throws
     {
-        if indexOfSide >= self.contents.count
+        do
+        {
+            let piecesAffected = try determinePiecesAffectedByRotation(indexOfSide)
+            let newOrder = (shiftPieces(piecesAffected.0, isCorners: false), shiftPieces(piecesAffected.1, isCorners: true))
+            for edgePiece in piecesAffected.0 // For edges
+            {
+                let workingIndexOfPiece = piecesAffected.0.indexOf(edgePiece)!
+                sendPieceToNewLocation(piecesAffected.0[workingIndexOfPiece], newLocation: newOrder.0[workingIndexOfPiece])
+                // Wow that's a doosey. Hope it works and I never have to try to fix it.
+            }
+            for cornerPiece in piecesAffected.1 // For corners
+            {
+                let workingIndexOfPiece = piecesAffected.1.indexOf(cornerPiece)!
+                sendPieceToNewLocation(piecesAffected.1[workingIndexOfPiece], newLocation: newOrder.1[workingIndexOfPiece])
+            }
+        }
+        catch Error.badIndex
         {
             throw Error.badIndex
         }
         
-        let opposingSide: Side
-        switch indexOfSide
-        {
-        case 0:
-            opposingSide = theCube.contents[5]
-        case 1:
-            opposingSide = theCube.contents[3]
-        case 2:
-            opposingSide = theCube.contents[4]
-        case 3:
-            opposingSide = theCube.contents[1]
-        case 4:
-            opposingSide = theCube.contents[2]
-        default:
-            opposingSide = theCube.contents[0]
-        }
-        return opposingSide
+        
     }
+
     
-    
+   
     func determinePiecesAffectedByRotation(indexOfSide: Int) throws -> (Array<Character>, Array<Character>)
     {
         if indexOfSide >= self.contents.count
@@ -110,7 +100,7 @@ class Cube
     
     func shiftPieces(initialState: Array<Character>, isCorners: Bool) -> Array<Character>
     {
-        var newState = Array<Character>()
+        var newState = initialState
         for item in initialState
         {
             let currentItemIndex = initialState.indexOf(item)
@@ -123,13 +113,46 @@ class Cube
             {
                 newItemIndex = currentItemIndex! + 1
             }
-            if newItemIndex > initialState.count
+            if newItemIndex >= initialState.count
             {
                 newItemIndex -= initialState.count // Allows for "wrapping" eg: capacity is 6, value is 8, value becomes 2
             }
             newState[newItemIndex] = item
         }
         return newState
+    }
+    
+    func findPieceOnCube(pieceCode: Character) -> Int?
+    {
+        var indexOfSideContainingPiece: Int?
+        var workingIndex = 0
+        for side in self.contents
+        {
+            if side.contents.0[pieceCode] != nil
+            {
+                indexOfSideContainingPiece = workingIndex
+                break
+            }
+            if side.contents.1[pieceCode] != nil
+            {
+                indexOfSideContainingPiece = workingIndex
+                break
+            }
+            workingIndex++
+        }
+        return indexOfSideContainingPiece
+    }
+    
+    func sendPieceToNewLocation(originalLocation: Character, newLocation: Character)
+    {
+        if String(originalLocation).capitalizedString == String(originalLocation) // if it is a corner
+        {
+            self.contents[findPieceOnCube(newLocation)!].contents.1[newLocation] = self.contents[findPieceOnCube(originalLocation)!].contents.1[originalLocation]
+        }
+        else
+        {
+            self.contents[findPieceOnCube(newLocation)!].contents.0[newLocation] = self.contents[findPieceOnCube(originalLocation)!].contents.0[originalLocation]
+        }
     }
 }
 

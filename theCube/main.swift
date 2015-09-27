@@ -24,7 +24,6 @@ if cube.contents.count == 6
     {
         do
         {
-            try side.opposingSide = cube.determineOpposingSide(cube, indexOfSide: indexOfSide)
             try side.sidesAffectedByRotation = cube.determinePiecesAffectedByRotation(indexOfSide)
         }
         catch Error.badIndex
@@ -34,8 +33,17 @@ if cube.contents.count == 6
         }
         indexOfSide++
     }
-    
-    
+}
+
+cube.printCubeContents()
+
+do
+{
+    try cube.rotateSide(0)
+}
+catch
+{
+    sleep(1)
 }
 
 

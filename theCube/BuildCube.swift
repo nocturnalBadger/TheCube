@@ -58,13 +58,13 @@ func buildCubeFromFile(fileName: String) throws -> Cube
 
                 if String(currentPieceLetter).capitalizedString == String(currentPieceLetter)
                 {
-                    currentSide.contents.0[currentPieceLetter] = Sticker(color: currentPieceColor)
+                    currentSide.contents.1[currentPieceLetter] = Sticker(color: currentPieceColor)
                     
                     // If the letter is capitol, put it into the list of corners
                 }
                 else
                 {
-                    currentSide.contents.1[currentPieceLetter] = Sticker(color: currentPieceColor)
+                    currentSide.contents.0[currentPieceLetter] = Sticker(color: currentPieceColor)
                     // Otherwise, it's an edge
                 }
                 pieceLettersToBeAssigned.removeAtIndex(pieceLettersToBeAssigned.startIndex)
