@@ -12,6 +12,11 @@ class Cube
 {
     var contents = Array<Side>()
     
+    enum Error: ErrorType
+    {
+        case badIndex
+    }
+    
     func printCubeContents()
     {
         var readableSideIndex = 1
@@ -45,8 +50,13 @@ class Cube
     }
     */
     
-    func determineOpposingSide(theCube: Cube, indexOfSide: Int) -> Side
+    func determineOpposingSide(theCube: Cube, indexOfSide: Int) throws -> Side
     {
+        if indexOfSide >= self.contents.count
+        {
+            throw Error.badIndex
+        }
+        
         let opposingSide: Side
         switch indexOfSide
         {
@@ -60,12 +70,47 @@ class Cube
             opposingSide = theCube.contents[1]
         case 4:
             opposingSide = theCube.contents[2]
-        case 5:
-            opposingSide = theCube.contents[0]
         default:
-            opposingSide = theCube.contents[5] // If this happens, we have bigger problems. Space is probably not working properly. Call Mr. Euclid.
+            opposingSide = theCube.contents[0]
         }
         return opposingSide
+    }
+    
+    
+    func determinePiecesAffectedByRotation(indexOfSide: Int) throws -> (Array<Character>, Array<Character>)
+    {
+        if indexOfSide >= self.contents.count
+        {
+            throw Error.badIndex
+        }
+        let piecesAffected: (Array<Character>, Array<Character>)
+        
+        switch indexOfSide
+        {
+        case 0:
+            // These are the spefs codes for the pieces affected. They are in the proper order of progression eg. with a clockwise turn of side 0, e will go to q
+            piecesAffected.0 = ["e","q","m","i"]
+            // Ok, So that's not exactally true for the corners. They each skip one in the order to find their new place. E to Q, F to R, Q to M, R to N etc.
+            piecesAffected.1 = ["E","F","Q","R","M","N","I","J"]
+        case 1:
+            piecesAffected.0 = ["d","l","x","r"]
+            piecesAffected.1 = ["A","D","I","L","U","X","S","R"]
+        case 2:
+            piecesAffected.0 = ["c","p","u","f"]
+            piecesAffected.1 = ["D","C","M","P","V","U","G","F"]
+        case 3:
+            piecesAffected.0 = ["b","t","v","j"]
+            piecesAffected.1 = ["C","B","Q","T","W","V","K","J"]
+        case 4:
+            piecesAffected.0 = ["a","h","w","n"]
+            piecesAffected.1 = ["B","A","E","H","X","W","O","N"]
+        default:
+            piecesAffected.0 = ["g","k","o","s"]
+            piecesAffected.1 = ["H","G","L","K","P","O","T","S"]
+            
+        }
+        
+        return piecesAffected
     }
     
     
