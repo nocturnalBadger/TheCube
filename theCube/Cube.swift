@@ -12,11 +12,6 @@ class Cube
 {
     var contents = Array<Side>()
     
-    enum Error: ErrorType
-    {
-        case badIndex
-    }
-    
     func printCubeContents()
     {
         var readableSideIndex = 1
@@ -113,6 +108,39 @@ class Cube
         return piecesAffected
     }
     
-    
-
+    func shiftPieces(initialState: Array<Character>, isCorners: Bool) -> Array<Character>
+    {
+        var newState = Array<Character>()
+        for item in initialState
+        {
+            let currentItemIndex = initialState.indexOf(item)
+            var newItemIndex: Int
+            if isCorners
+            {
+                newItemIndex = currentItemIndex! + 2
+            }
+            else
+            {
+                newItemIndex = currentItemIndex! + 1
+            }
+            if newItemIndex > initialState.count
+            {
+                newItemIndex -= initialState.count // Allows for "wrapping" eg: capacity is 6, value is 8, value becomes 2
+            }
+            newState[newItemIndex] = item
+        }
+        return newState
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

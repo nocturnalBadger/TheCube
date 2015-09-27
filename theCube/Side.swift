@@ -14,5 +14,7 @@ class Side
     var contents = (Dictionary<Character, Sticker>(), Dictionary<Character, Sticker>())
     
     var opposingSide: Side? = nil
+    var sidesAffectedByRotation = (Array<Character>(), Array<Character>())
+    
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 
-func buildCubeFromFile(fileName: String) -> Cube
+func buildCubeFromFile(fileName: String) throws -> Cube
 {
     let cube = Cube()
     
@@ -22,6 +22,7 @@ func buildCubeFromFile(fileName: String) -> Cube
     else
     {
         print("Failed to locate file.")
+        throw Error.couldNotFindFile
     }
     
     if let content = possibleContent
@@ -54,7 +55,7 @@ func buildCubeFromFile(fileName: String) -> Cube
                     
                 }
                 let currentPieceLetter: Character = pieceLettersToBeAssigned[pieceLettersToBeAssigned.startIndex]
-                //print(currentPieceLetter)
+
                 if String(currentPieceLetter).capitalizedString == String(currentPieceLetter)
                 {
                     currentSide.contents.0[currentPieceLetter] = Sticker(color: currentPieceColor)
@@ -69,7 +70,6 @@ func buildCubeFromFile(fileName: String) -> Cube
                 pieceLettersToBeAssigned.removeAtIndex(pieceLettersToBeAssigned.startIndex)
             }
             cube.contents.append(currentSide)
-            //print(currentSide.contents)
         }
     }
     

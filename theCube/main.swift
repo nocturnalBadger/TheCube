@@ -8,14 +8,30 @@
 
 import Foundation
 
-let cube = buildCubeFromFile("cube")
+enum Error: ErrorType
+{
+    case badIndex
+    case couldNotFindFile
+}
+
+let cube = try buildCubeFromFile("cube")
+
 
 if cube.contents.count == 6
 {
     var indexOfSide = 0
     for side in cube.contents
     {
-        side.opposingSide = cube.determineOpposingSide(cube, indexOfSide: indexOfSide)
+        do
+        {
+            try side.opposingSide = cube.determineOpposingSide(cube, indexOfSide: indexOfSide)
+            try side.sidesAffectedByRotation = cube.determinePiecesAffectedByRotation(indexOfSide)
+        }
+        catch Error.badIndex
+        {
+            print("This is not good.")
+            exit(4) // I don't know anything about exit codes. This one seems nice.
+        }
         indexOfSide++
     }
     
