@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4805015E1BB6FB4700D2159F /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4805015D1BB6FB4700D2159F /* Side.swift */; settings = {ASSET_TAGS = (); }; };
+		480501601BB7321B00D2159F /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4805015F1BB7321B00D2159F /* Cube.swift */; settings = {ASSET_TAGS = (); }; };
 		4864F8731BB60DB400CDEA12 /* cube.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4864F8721BB60D5900CDEA12 /* cube.txt */; };
 		48A9F9F71AE7F63500214A15 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9F9F61AE7F63500214A15 /* main.swift */; };
 		48A9F9FE1AE7F64B00214A15 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9F9FD1AE7F64A00214A15 /* Sticker.swift */; };
-		48A9FA021AE7F7A000214A15 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9FA011AE7F7A000214A15 /* Piece.swift */; };
 		48A9FA041AE7F96800214A15 /* BuildCube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9FA031AE7F96800214A15 /* BuildCube.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,11 +30,11 @@
 
 /* Begin PBXFileReference section */
 		4805015D1BB6FB4700D2159F /* Side.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
+		4805015F1BB7321B00D2159F /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		4864F8721BB60D5900CDEA12 /* cube.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.txt; sourceTree = "<group>"; };
 		48A9F9F31AE7F63500214A15 /* theCube */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = theCube; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A9F9F61AE7F63500214A15 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		48A9F9FD1AE7F64A00214A15 /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
-		48A9FA011AE7F7A000214A15 /* Piece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Piece.swift; path = ../Piece.swift; sourceTree = "<group>"; };
 		48A9FA031AE7F96800214A15 /* BuildCube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildCube.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,9 +79,9 @@
 			children = (
 				48A9F9F61AE7F63500214A15 /* main.swift */,
 				48A9F9FD1AE7F64A00214A15 /* Sticker.swift */,
-				48A9FA011AE7F7A000214A15 /* Piece.swift */,
 				48A9FA031AE7F96800214A15 /* BuildCube.swift */,
 				4805015D1BB6FB4700D2159F /* Side.swift */,
+				4805015F1BB7321B00D2159F /* Cube.swift */,
 			);
 			path = theCube;
 			sourceTree = "<group>";
@@ -146,9 +146,9 @@
 			files = (
 				48A9F9F71AE7F63500214A15 /* main.swift in Sources */,
 				48A9FA041AE7F96800214A15 /* BuildCube.swift in Sources */,
+				480501601BB7321B00D2159F /* Cube.swift in Sources */,
 				4805015E1BB6FB4700D2159F /* Side.swift in Sources */,
 				48A9F9FE1AE7F64B00214A15 /* Sticker.swift in Sources */,
-				48A9FA021AE7F7A000214A15 /* Piece.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,4 +8,6 @@
 
 import Foundation
 
-buildCubeFromFile("cube")
+let cube = buildCubeFromFile("cube")
+
+cube.printCubeContents()
