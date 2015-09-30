@@ -36,6 +36,8 @@ class Cube
     
     func rotateSide(indexOfSide: Int) throws
     {
+        let stateOfCubeBeforeRotation = self.contents
+        
         do
         {
             let piecesAffected = try determinePiecesAffectedByRotation(indexOfSide)
@@ -43,13 +45,13 @@ class Cube
             for edgePiece in piecesAffected.0 // For edges
             {
                 let workingIndexOfPiece = piecesAffected.0.indexOf(edgePiece)!
-                sendPieceToNewLocation(piecesAffected.0[workingIndexOfPiece], newLocation: newOrder.0[workingIndexOfPiece])
+                sendPieceToNewLocation(piecesAffected.0[workingIndexOfPiece], newLocation: newOrder.0[workingIndexOfPiece], stateOfCubeBeforeMovement: stateOfCubeBeforeRotation)
                 // Wow that's a doosey. Hope it works and I never have to try to fix it.
             }
             for cornerPiece in piecesAffected.1 // For corners
             {
                 let workingIndexOfPiece = piecesAffected.1.indexOf(cornerPiece)!
-                sendPieceToNewLocation(piecesAffected.1[workingIndexOfPiece], newLocation: newOrder.1[workingIndexOfPiece])
+                sendPieceToNewLocation(piecesAffected.1[workingIndexOfPiece], newLocation: newOrder.1[workingIndexOfPiece], stateOfCubeBeforeMovement: stateOfCubeBeforeRotation)
             }
         }
         catch Error.badIndex
@@ -122,7 +124,7 @@ class Cube
         return newState
     }
     
-    func findPieceOnCube(pieceCode: Character) -> Int?
+    func findPieceOnCube(pieceCode: Character) -> Int? // Returns a side index
     {
         var indexOfSideContainingPiece: Int?
         var workingIndex = 0
@@ -143,15 +145,19 @@ class Cube
         return indexOfSideContainingPiece
     }
     
-    func sendPieceToNewLocation(originalLocation: Character, newLocation: Character)
+    func sendPieceToNewLocation(originalLocation: Character, newLocation: Character, stateOfCubeBeforeMovement: Array<Side>)
     {
         if String(originalLocation).capitalizedString == String(originalLocation) // if it is a corner
         {
-            self.contents[findPieceOnCube(newLocation)!].contents.1[newLocation] = self.contents[findPieceOnCube(originalLocation)!].contents.1[originalLocation]
+            self.contents[findPieceOnCube(newLocation)!].contents.1[newLocation] = stateOfCubeBeforeMovement[findPieceOnCube(originalLocation)!].contents.1[originalLocation]
         }
         else
         {
-            self.contents[findPieceOnCube(newLocation)!].contents.0[newLocation] = self.contents[findPieceOnCube(originalLocation)!].contents.0[originalLocation]
+            print("Moving \(stateOfCubeBeforeMovement[findPieceOnCube(originalLocation)!].contents.0[originalLocation]!.color) to the location of \(self.contents[findPieceOnCube(newLocation)!].contents.0[newLocation]!.color) ")
+            let stickerAtOriginalPosition: Sticker = stateOfCubeBeforeMovement[findPieceOnCube(originalLocation)!].contents.0[originalLocation]!
+            self.contents[findPieceOnCube(newLocation)!].contents.0[newLocation] = stickerAtOriginalPosition
+            print("position \(newLocation) is now \(self.contents[findPieceOnCube(originalLocation)!].contents.0[originalLocation]!.color)")
+            
         }
     }
 }
