@@ -18,7 +18,6 @@ class Sticker
         case green
         case orange
         case blue
-        
         case white
         case yellow
     }

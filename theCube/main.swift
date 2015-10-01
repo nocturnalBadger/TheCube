@@ -24,7 +24,7 @@ if cube.contents.count == 6
     {
         do
         {
-            try side.sidesAffectedByRotation = cube.determinePiecesAffectedByRotation(indexOfSide)
+            try cube.contents[indexOfSide].sidesAffectedByRotation = cube.determinePiecesAffectedByRotation(indexOfSide)
         }
         catch Error.badIndex
         {
@@ -35,11 +35,12 @@ if cube.contents.count == 6
     }
 }
 
-cube.printCubeContents()
 
 do
 {
-    try cube.rotateSide(0)
+
+    try cube.rotateSide(1, isInverse: true)
+    try cube.rotateSide(0, isInverse: false)
 }
 catch
 {

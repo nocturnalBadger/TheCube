@@ -33,7 +33,7 @@ func buildCubeFromFile(fileName: String) throws -> Cube
         
         for line in fileContent
         {
-            let currentSide = Side()
+            var currentSide = Side()
             
             for letter in line.characters
             {

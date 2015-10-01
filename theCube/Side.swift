@@ -8,12 +8,12 @@
 
 import Foundation
 
-class Side
+struct Side
 {
     //var contents = Array<Sticker>()
     var contents = (Dictionary<Character, Sticker>(), Dictionary<Character, Sticker>())
     
-    var sidesAffectedByRotation = (Array<Character>(), Array<Character>())
+    var sidesAffectedByRotation = ((Array<Character>(), Array<Character>()), (Array<Character>(), Array<Character>()))
     
     
 }
